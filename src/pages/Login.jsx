@@ -41,22 +41,6 @@ const Login = () => {
     handleLoginSubmit(username, password);
   };
 
-  const handleQuickDemoLogin = (demoRole) => {
-    if (demoRole === 'STUDENT') {
-      setUsername('student1');
-      setPassword('studentpassword123');
-      handleLoginSubmit('student1', 'studentpassword123');
-    } else if (demoRole === 'HOD') {
-      setUsername('hod_computer');
-      setPassword('hodpassword123');
-      handleLoginSubmit('hod_computer', 'hodpassword123');
-    } else if (demoRole === 'ADMIN') {
-      setUsername('admin');
-      setPassword('adminpassword123');
-      handleLoginSubmit('admin', 'adminpassword123');
-    }
-  };
-
   function togglePassVisible() {
     setShowPassword((prev) => !prev);
   }
@@ -64,43 +48,6 @@ const Login = () => {
   return (
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-transparent">
       <div className="w-full max-w-md space-y-6">
-
-        {/* Quick Demo Login Bar */}
-        <div className="glass-card p-4 rounded-2xl border border-blue-200 dark:border-blue-500/20 bg-blue-50/90 dark:bg-blue-950/30 text-xs space-y-2.5">
-          <div className="flex items-center justify-between font-bold text-blue-900 dark:text-blue-300">
-            <span className="flex items-center"><Sparkles className="w-4 h-4 mr-1 text-amber-500" /> 1-Click Quick Demo Login</span>
-            <span className="text-[10px] bg-blue-100 dark:bg-blue-900/60 px-2 py-0.5 rounded text-blue-800 dark:text-blue-300">Pre-seeded</span>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <button
-              type="button"
-              onClick={() => handleQuickDemoLogin('STUDENT')}
-              className="py-2 px-2.5 rounded-xl bg-white dark:bg-slate-900 border border-blue-200 dark:border-slate-800 hover:border-blue-500 text-slate-800 dark:text-slate-200 font-extrabold flex flex-col items-center justify-center space-y-0.5 hover:scale-105 transition-all shadow-xs"
-            >
-              <User className="w-4 h-4 text-blue-600" />
-              <span className="text-[11px]">Student</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoLogin('HOD')}
-              className="py-2 px-2.5 rounded-xl bg-white dark:bg-slate-900 border border-blue-200 dark:border-slate-800 hover:border-amber-500 text-slate-800 dark:text-slate-200 font-extrabold flex flex-col items-center justify-center space-y-0.5 hover:scale-105 transition-all shadow-xs"
-            >
-              <Building2 className="w-4 h-4 text-amber-600" />
-              <span className="text-[11px]">HOD</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoLogin('ADMIN')}
-              className="py-2 px-2.5 rounded-xl bg-white dark:bg-slate-900 border border-blue-200 dark:border-slate-800 hover:border-purple-500 text-slate-800 dark:text-slate-200 font-extrabold flex flex-col items-center justify-center space-y-0.5 hover:scale-105 transition-all shadow-xs"
-            >
-              <ShieldAlert className="w-4 h-4 text-purple-600" />
-              <span className="text-[11px]">Admin</span>
-            </button>
-          </div>
-        </div>
-
         {/* Login Form Container */}
         <div className="glass-card p-8 rounded-3xl shadow-xl">
 
