@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserCheck, AlertCircle } from 'lucide-react';
+import { UserCheck, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import INSTITUTION_CONFIG from '../config/institutionConfig.js';
 import api from '../api/axios.js';
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     Username: '',
     Email: '',
@@ -125,15 +126,25 @@ const Register = () => {
                 <label className="block text-xs font-bold text-slate-800 dark:text-slate-300 mb-2 uppercase tracking-wider">
                   Password
                 </label>
-                <input
-                  name="Password"
-                  type="password"
-                  required
-                  placeholder="••••••••"
-                  value={formData.Password}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all text-sm font-medium"
-                />
+                <div className="relative">
+                  <input
+                    name="Password"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    placeholder="••••••••"
+                    value={formData.Password}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 pr-12 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all text-sm font-medium"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+                    title={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
               </div>
 
               {/* Enrollment No */}

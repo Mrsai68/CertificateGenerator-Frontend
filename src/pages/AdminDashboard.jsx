@@ -6,7 +6,7 @@ import INSTITUTION_CONFIG from '../config/institutionConfig.js';
 import {
   ShieldAlert, Search, CheckCircle2, XCircle, Clock, AlertCircle, RefreshCw, Building2,
   Check, X, Users, FileText, Layers, Mail, UserPlus, UserCheck, UserX, Trash2, Power,
-  TrendingUp, BarChart3, FileCheck2, LogOut, Eye, LayoutGrid, List, Sparkles, Award
+  TrendingUp, BarChart3, FileCheck2, LogOut, Eye, EyeOff, LayoutGrid, List, Sparkles, Award
 } from 'lucide-react';
 import CertificatePreviewModal from '../components/CertificatePreviewModal.jsx';
 
@@ -40,6 +40,7 @@ export default function AdminDashboard() {
 
   // Modal State for Adding User
   const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showAddUserPassword, setShowAddUserPassword] = useState(false);
   const [newUserForm, setNewUserForm] = useState({
     username: '',
     email: '',
@@ -896,14 +897,24 @@ export default function AdminDashboard() {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-800 dark:text-slate-300 mb-1 uppercase tracking-wider">Password *</label>
-                  <input
-                    type="password"
-                    required
-                    minLength={6}
-                    value={newUserForm.password}
-                    onChange={(e) => setNewUserForm({ ...newUserForm, password: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-xs font-semibold"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showAddUserPassword ? "text" : "password"}
+                      required
+                      minLength={6}
+                      value={newUserForm.password}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, password: e.target.value })}
+                      className="w-full px-3 py-2 pr-10 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-xs font-semibold"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowAddUserPassword(!showAddUserPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+                      title={showAddUserPassword ? "Hide password" : "Show password"}
+                    >
+                      {showAddUserPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
 
                 <div>

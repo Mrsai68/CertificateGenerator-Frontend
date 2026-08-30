@@ -70,7 +70,20 @@ export default function HodDashboard() {
     }
   };
 
-  const filteredRequests = requests.filter(req => {
+  const hodDept = user?.department || 'General';
+  const isSuperAdmin = hodDept === 'ALL' || user?.role === 'ROLE_ADMIN';
+
+  // Filter requests strictly by HOD department if not Super Admin
+  const deptRequests = isSuperAdmin
+    ? requests
+    : requests.filter(r => r.department === hodDept);
+
+  // Filter students strictly by HOD department if not Super Admin
+  const deptStudents = isSuperAdmin
+    ? students
+    : students.filter(s => s.department === hodDept);
+
+  const filteredRequests = deptRequests.filter(req => {
     const matchesStatus = statusFilter === 'ALL' || req.status === statusFilter;
     const q = searchQuery.toLowerCase();
     const matchesSearch =
@@ -94,13 +107,10 @@ export default function HodDashboard() {
     }
   };
 
-  const pendingCount = requests.filter(r => r.status === 'PENDING').length;
-  const approvedCount = requests.filter(r => r.status === 'APPROVED').length;
-  const rejectedCount = requests.filter(r => r.status === 'REJECTED').length;
-  const totalStudents = students.length;
-
-  const hodDept = user?.department || 'General';
-  const isSuperAdmin = hodDept === 'ALL' || user?.role === 'ROLE_ADMIN';
+  const pendingCount = deptRequests.filter(r => r.status === 'PENDING').length;
+  const approvedCount = deptRequests.filter(r => r.status === 'APPROVED').length;
+  const rejectedCount = deptRequests.filter(r => r.status === 'REJECTED').length;
+  const totalStudents = deptStudents.length;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
