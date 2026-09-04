@@ -116,7 +116,7 @@ export default function HodDashboard() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
       {/* Header Banner */}
-      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden shadow-xs">
+      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden shadow-xs animate-slideInDown card-hover-lift">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center space-x-3">
@@ -141,19 +141,19 @@ export default function HodDashboard() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="px-4 py-2 rounded-2xl glass-card bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 text-center">
+            <div className="px-4 py-2 rounded-2xl glass-card bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 text-center animate-fadeIn stagger-1 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Pending Queue</span>
               <span className="text-lg font-bold text-amber-600 dark:text-amber-400">{pendingCount}</span>
             </div>
-            <div className="px-4 py-2 rounded-2xl glass-card bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 text-center">
+            <div className="px-4 py-2 rounded-2xl glass-card bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 text-center animate-fadeIn stagger-2 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Approved</span>
               <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{approvedCount}</span>
             </div>
-            <div className="px-4 py-2 rounded-2xl glass-card bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/40 text-center">
+            <div className="px-4 py-2 rounded-2xl glass-card bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/40 text-center animate-fadeIn stagger-3 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Rejected</span>
               <span className="text-lg font-bold text-rose-600 dark:text-rose-400">{rejectedCount}</span>
             </div>
-            <div className="px-4 py-2 rounded-2xl glass-card bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/40 text-center">
+            <div className="px-4 py-2 rounded-2xl glass-card bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/40 text-center animate-fadeIn stagger-4 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Total Students</span>
               <span className="text-lg font-bold text-blue-600 dark:text-blue-400">{totalStudents}</span>
             </div>

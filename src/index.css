@@ -100,7 +100,7 @@ html.dark textarea::placeholder {
 }
 
 /* =========================================================
-   KEYFRAME ANIMATIONS & GLOW UTILITIES
+   ADVANCED KEYFRAME ANIMATIONS & GLOW UTILITIES
    ========================================================= */
 @keyframes scaleUp {
   0% { transform: scale(0.95); opacity: 0; }
@@ -108,26 +108,134 @@ html.dark textarea::placeholder {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(6px); }
+  0% { opacity: 0; transform: translateY(8px); }
   100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+  0% { opacity: 0; transform: translateY(-24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-24px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(24px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  50% { opacity: 1; transform: scale(1.04); }
 }
 
 @keyframes floatSoft {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes pulseHalo {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* =========================================================
+   COMPONENT LANDING ON PAGE ANIMATIONS
+   ========================================================= */
+@keyframes componentLandingDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.96);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translateY(4px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes componentLandingFloatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes componentLandingPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.landing-drop {
+  animation: componentLandingDrop 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.landing-float {
+  animation: componentLandingFloatIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.landing-pop {
+  animation: componentLandingPop 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .animate-scaleUp {
-  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideInDown {
+  animation: slideInDown 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-pulseGlow {
@@ -136,6 +244,45 @@ html.dark textarea::placeholder {
 
 .animate-floatSoft {
   animation: floatSoft 5s ease-in-out infinite;
+}
+
+.animate-pulseHalo {
+  animation: pulseHalo 2.5s infinite;
+}
+
+.animate-spinSlow {
+  animation: spinSlow 12s linear infinite;
+}
+
+.animate-bounceSoft {
+  animation: bounceSoft 2.5s ease-in-out infinite;
+}
+
+/* Enhanced Stagger Animation Delays */
+.stagger-1 { animation-delay: 0.15s; }
+.stagger-2 { animation-delay: 0.32s; }
+.stagger-3 { animation-delay: 0.50s; }
+.stagger-4 { animation-delay: 0.68s; }
+.stagger-5 { animation-delay: 0.85s; }
+.stagger-6 { animation-delay: 1.05s; }
+
+/* Interactive Hover Utilities */
+.card-hover-lift {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -15px rgba(37, 99, 235, 0.18);
+}
+
+.btn-animated {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-animated:hover {
+  transform: scale(1.04);
+}
+.btn-animated:active {
+  transform: scale(0.97);
 }
 
 /* Custom Scrollbar */
@@ -153,3 +300,39 @@ html.dark textarea::placeholder {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.8);
 }
+
+/* =========================================================
+   SCROLL REVEAL (COMES UP) & SCROLL DOWN (COMPRESSES DOWN)
+   ========================================================= */
+.scroll-compress-box {
+  transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-timeline-compress {
+    animation: scrollCompressTimeline linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes scrollCompressTimeline {
+    0% {
+      opacity: 0;
+      transform: translateY(85px) scale(0.90);
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+    100% {
+      opacity: 0.65;
+      transform: translateY(-40px) scale(0.91);
+    }
+  }
+}
+

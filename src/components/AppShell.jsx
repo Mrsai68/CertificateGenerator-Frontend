@@ -107,8 +107,17 @@ export default function AppShell({ children }) {
           {/* Institution Brand Logo */}
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 p-0.5 shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform flex items-center justify-center text-white">
-                <ShieldCheck className="w-6 h-6" />
+              <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-1 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden">
+                <img
+                    src="/msbte.png"
+                    alt="MSBTE Emblem"
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.style.display = 'none';
+                    }}
+                />
+                <ShieldCheck className="h-6 w-6 text-blue-600 dark:text-blue-400 hidden" />
               </div>
               <div>
                 <h2 className="font-extrabold text-slate-900 dark:text-slate-100 text-sm tracking-tight leading-tight">

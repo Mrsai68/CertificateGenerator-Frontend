@@ -5,6 +5,7 @@ import {
   ShieldCheck, Search, Building2, Sparkles, Award, ExternalLink, HelpCircle, ChevronDown, ChevronUp, CheckCircle2
 } from 'lucide-react';
 import INSTITUTION_CONFIG from '../config/institutionConfig.js';
+import ScrollCompress from '../components/ScrollCompress.jsx';
 
 export default function BonafideLandingPage() {
   const [tokenInput, setTokenInput] = useState('');
@@ -47,18 +48,18 @@ export default function BonafideLandingPage() {
       {/* Hero Section */}
       <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 px-4 sm:px-6 overflow-hidden">
         {/* Glow Effects */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[380px] bg-blue-600/15 blur-[140px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-indigo-600/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[380px] bg-blue-600/15 blur-[140px] rounded-full pointer-events-none animate-pulseGlow" />
+        <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-indigo-600/10 blur-[100px] rounded-full pointer-events-none animate-floatSoft" />
 
-        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6">
+        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6 animate-slideInUp">
 
           {/* Institution Header Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-500/30 bg-blue-50/80 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-xs font-bold shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-500/30 bg-blue-50/80 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-xs font-bold shadow-xs animate-bounceSoft">
             <Building2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>{INSTITUTION_CONFIG.collegeName}</span>
             <span className="h-3 w-px bg-blue-300 dark:bg-blue-800"></span>
             <span className="text-amber-600 dark:text-amber-400 flex items-center font-extrabold">
-              <Sparkles className="w-3 h-3 mr-1" /> MERN Stack Portal
+              <Sparkles className="w-3 h-3 mr-1 animate-spinSlow" /> MERN Stack Portal
             </span>
           </div>
 
@@ -75,14 +76,14 @@ export default function BonafideLandingPage() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link to="/login" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold transition-all shadow-lg shadow-blue-600/30 hover:scale-105 text-sm">
+              <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold transition-all shadow-lg shadow-blue-600/30 btn-animated text-sm">
                 <span>Apply for Certificate</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </Link>
 
             <Link to="/login" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-800 bg-white/90 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 font-extrabold text-slate-800 dark:text-slate-200 transition-all shadow-xs text-sm">
+              <button className="w-full sm:w-auto px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-800 bg-white/90 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 font-extrabold text-slate-800 dark:text-slate-200 transition-all shadow-xs btn-animated text-sm">
                 Faculty / Admin Sign In
               </button>
             </Link>
@@ -90,7 +91,7 @@ export default function BonafideLandingPage() {
 
           {/* Live Public Verification Search Bar Widget */}
           <div className="max-w-2xl mx-auto pt-6">
-            <form onSubmit={handleVerifySubmit} className="glass-card p-2 sm:p-2.5 rounded-2xl border border-blue-200 dark:border-blue-500/30 shadow-xl flex flex-col sm:flex-row items-center gap-2 bg-white/90 dark:bg-slate-900/80">
+            <form onSubmit={handleVerifySubmit} className="glass-card p-2 sm:p-2.5 rounded-2xl border border-blue-200 dark:border-blue-500/30 shadow-xl flex flex-col sm:flex-row items-center gap-2 bg-white/90 dark:bg-slate-900/80 card-hover-lift">
               <div className="relative w-full flex-1">
                 <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
@@ -103,7 +104,7 @@ export default function BonafideLandingPage() {
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center space-x-1.5 shrink-0"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center space-x-1.5 shrink-0 btn-animated"
               >
                 <ShieldCheck className="w-4 h-4" />
                 <span>Verify Document</span>
@@ -118,35 +119,35 @@ export default function BonafideLandingPage() {
       </section>
 
       {/* Live Stat Banner */}
-      <section className="py-10 border-y border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md">
+      <ScrollCompress className="py-10 border-y border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
+          <div className="animate-fadeIn stagger-1">
             <span className="text-3xl sm:text-4xl font-extrabold text-blue-600 dark:text-blue-400">1,250+</span>
             <span className="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mt-1">Certificates Issued</span>
           </div>
 
-          <div>
+          <div className="animate-fadeIn stagger-2">
             <span className="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400">100%</span>
             <span className="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mt-1">Cryptographic Anti-Tamper</span>
           </div>
 
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-purple-600 dark:text-purple-400">4</span>
+          <div className="animate-fadeIn stagger-3">
+            <span className="text-3xl sm:text-4xl font-extrabold text-purple-600 dark:text-purple-400">5</span>
             <span className="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mt-1">Engineering Depts</span>
           </div>
 
-          <div>
+          <div className="animate-fadeIn stagger-4">
             <span className="text-3xl sm:text-4xl font-extrabold text-amber-600 dark:text-amber-400">0 min</span>
             <span className="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mt-1">Paper Counter Delay</span>
           </div>
         </div>
-      </section>
+      </ScrollCompress>
 
       {/* Workflow Section */}
-      <section id="process" className="py-20 px-6">
+      <ScrollCompress id="process" className="py-20 px-6">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 animate-bounceSoft">
               Automated Process
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 mt-3">Simple 3-Step Online Workflow</h2>
@@ -156,41 +157,41 @@ export default function BonafideLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-4 hover:border-blue-500/50 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-extrabold text-xl shadow-inner">
+            <ScrollCompress staggerDelay={0.05} className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-4 card-hover-lift">
+              <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-extrabold text-xl shadow-inner animate-floatSoft">
                 <FileText className="w-7 h-7" />
               </div>
               <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">1. Student Application</h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                 Log in to student portal, choose your certificate purpose (Scholarship, Passport, Higher Education), and submit.
               </p>
-            </div>
+            </ScrollCompress>
 
-            <div className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-4 hover:border-amber-500/50 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-600/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-extrabold text-xl shadow-inner">
+            <ScrollCompress staggerDelay={0.12} className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-4 card-hover-lift">
+              <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-600/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-extrabold text-xl shadow-inner animate-floatSoft">
                 <CheckCircle className="w-7 h-7" />
               </div>
               <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">2. HOD Review & Approval</h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                 Department HOD reviews your application on their routed queue and approves it with a single click.
               </p>
-            </div>
+            </ScrollCompress>
 
-            <div className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-4 hover:border-emerald-500/50 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-600/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-extrabold text-xl shadow-inner">
+            <ScrollCompress staggerDelay={0.18} className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-4 card-hover-lift">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-600/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-extrabold text-xl shadow-inner animate-floatSoft">
                 <Download className="w-7 h-7" />
               </div>
               <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">3. PDF Email & Download</h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                 The server generates a PDF with embedded e-Sign and QR code, dispatches it to your email, and unlocks 1-click download.
               </p>
-            </div>
+            </ScrollCompress>
           </div>
         </div>
-      </section>
+      </ScrollCompress>
 
       {/* Departments Showcase Grid */}
-      <section className="py-16 px-6 bg-slate-100/60 dark:bg-slate-900/40 border-t border-slate-200 dark:border-slate-800">
+      <ScrollCompress className="py-16 px-6 bg-slate-100/60 dark:bg-slate-900/40 border-t border-slate-200 dark:border-slate-800">
         <div className="max-w-6xl mx-auto space-y-10">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Integrated Academic Departments</h2>
@@ -200,9 +201,9 @@ export default function BonafideLandingPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {INSTITUTION_CONFIG.departments.map((dept) => (
-              <div key={dept} className="glass-card p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+            {INSTITUTION_CONFIG.departments.map((dept, index) => (
+              <ScrollCompress key={dept} staggerDelay={(index % 4) * 0.08} className="glass-card p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 shadow-xs space-y-3 card-hover-lift">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold animate-floatSoft">
                   <Building2 className="w-5 h-5" />
                 </div>
                 <h4 className="font-extrabold text-sm text-slate-900 dark:text-slate-100">{dept}</h4>
@@ -210,14 +211,14 @@ export default function BonafideLandingPage() {
                   <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold">HOD Active</span>
                   <span>Auto-Routing</span>
                 </div>
-              </div>
+              </ScrollCompress>
             ))}
           </div>
         </div>
-      </section>
+      </ScrollCompress>
 
       {/* FAQ Accordion */}
-      <section className="py-20 px-6">
+      <ScrollCompress className="py-20 px-6">
         <div className="max-w-4xl mx-auto space-y-10">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
@@ -228,10 +229,7 @@ export default function BonafideLandingPage() {
 
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-white/95 dark:bg-slate-900/60 transition-all"
-              >
+              <ScrollCompress key={index} staggerDelay={index * 0.05} className="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-white/95 dark:bg-slate-900/60 transition-all card-hover-lift">
                 <button
                   onClick={() => toggleFaq(index)}
                   className="w-full p-5 text-left flex items-center justify-between font-extrabold text-sm text-slate-900 dark:text-slate-100"
@@ -247,14 +245,14 @@ export default function BonafideLandingPage() {
                     {faq.a}
                   </div>
                 )}
-              </div>
+              </ScrollCompress>
             ))}
           </div>
         </div>
-      </section>
+      </ScrollCompress>
 
       {/* Official Accreditation Footer Bar */}
-      <section className="py-6 border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-600 dark:text-slate-400 text-xs font-semibold text-center">
+      <ScrollCompress className="py-6 border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-600 dark:text-slate-400 text-xs font-semibold text-center">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3">
             <Award className="w-4 h-4 text-blue-600" />
@@ -266,7 +264,7 @@ export default function BonafideLandingPage() {
             <span>Indian e-Sign Standard PKI</span>
           </div>
         </div>
-      </section>
+      </ScrollCompress>
 
     </div>
   );

@@ -36,11 +36,11 @@ export default function PublicVerify() {
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-transparent">
-      <div className="w-full max-w-2xl">
+      <div className="w-full max-w-2xl landing-drop">
 
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 shadow-xl shadow-blue-500/20 mb-4 text-white">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 shadow-xl shadow-blue-500/20 mb-4 text-white animate-pulseHalo">
             <ShieldCheck className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Public Document Verification</h1>
@@ -88,7 +88,7 @@ export default function PublicVerify() {
           </div>
         ) : (
           /* Green Verified Seal - Certificate Authentic */
-          <div className="glass-card p-8 sm:p-10 rounded-3xl border-2 border-emerald-500/50 bg-white/95 dark:bg-slate-900/60 shadow-xl space-y-8">
+          <div className="glass-card p-8 sm:p-10 rounded-3xl border-2 border-emerald-500/50 bg-white/95 dark:bg-slate-900/60 shadow-xl space-y-8 landing-pop card-hover-lift">
 
             {/* Green Seal Badge */}
             <div className="text-center">

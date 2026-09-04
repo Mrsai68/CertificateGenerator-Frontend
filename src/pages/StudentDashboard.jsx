@@ -200,11 +200,11 @@ const StudentDashboard = () => {
       )}
 
       {/* Student Profile Header Banner */}
-      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden shadow-xs">
-        <div className="absolute right-0 top-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden shadow-xs animate-slideInDown card-hover-lift">
+        <div className="absolute right-0 top-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none animate-pulseGlow"></div>
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-600/30">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-600/30 animate-pulseHalo">
               {displayName.charAt(0).toUpperCase()}
             </div>
             <div>
@@ -215,7 +215,7 @@ const StudentDashboard = () => {
                 </span>
                 <button
                   onClick={() => setShowEditProfileModal(true)}
-                  className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 border border-slate-300 dark:border-slate-700 transition-colors"
+                  className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 border border-slate-300 dark:border-slate-700 transition-colors btn-animated"
                   title="Edit Profile Full Name & Details"
                 >
                   <Edit3 className="w-4 h-4" />
@@ -233,10 +233,10 @@ const StudentDashboard = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-3 bg-slate-100 dark:bg-slate-900/80 px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-800 text-xs">
+          <div className="flex items-center space-x-6 text-xs bg-slate-100 dark:bg-slate-900/80 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 self-stretch md:self-auto justify-around">
             <div>
-              <span className="text-slate-600 dark:text-slate-500 block font-semibold">Academic Session</span>
-              <span className="font-extrabold text-slate-900 dark:text-slate-200">{studentProfile?.academicYear || '2025-2026'}</span>
+              <span className="text-slate-600 dark:text-slate-500 block font-semibold">Institution</span>
+              <span className="font-extrabold text-slate-900 dark:text-slate-200">{INSTITUTION_CONFIG.collegeShortName}</span>
             </div>
             <div className="h-8 w-px bg-slate-300 dark:bg-slate-800"></div>
             <div>
@@ -250,7 +250,7 @@ const StudentDashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
         {/* Application Submission Form */}
-        <div className="glass-card p-6 rounded-3xl border border-slate-200 dark:border-slate-800 h-fit space-y-6 bg-white/95 dark:bg-slate-900/60 shadow-xs">
+        <div className="glass-card p-6 rounded-3xl border border-slate-200 dark:border-slate-800 h-fit space-y-6 bg-white/95 dark:bg-slate-900/60 shadow-xs card-hover-lift animate-slideInLeft">
           <div className="flex items-center space-x-3 pb-4 border-b border-slate-200 dark:border-slate-800">
             <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400 font-bold">
               <PlusCircle className="w-5 h-5" />

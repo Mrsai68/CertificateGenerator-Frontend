@@ -65,9 +65,9 @@ const Register = () => {
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center py-10 px-4">
-      <div className="max-w-xl w-full">
+      <div className="max-w-xl w-full animate-scaleUp">
 
-        <div className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl space-y-6 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden">
+        <div className="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl space-y-6 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden card-hover-lift">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/10 rounded-full blur-2xl"></div>
 
           <div className="text-center space-y-2">

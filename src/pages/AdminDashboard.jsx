@@ -296,11 +296,11 @@ export default function AdminDashboard() {
       )}
 
       {/* Header Banner */}
-      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden shadow-xs">
+      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 relative overflow-hidden shadow-xs animate-slideInDown card-hover-lift">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center space-x-3">
-              <div className="p-2.5 rounded-2xl bg-purple-50 dark:bg-purple-600/20 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20">
+              <div className="p-2.5 rounded-2xl bg-purple-50 dark:bg-purple-600/20 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20 animate-pulseHalo">
                 <ShieldAlert className="w-6 h-6" />
               </div>
               <div>
@@ -323,19 +323,19 @@ export default function AdminDashboard() {
 
           {/* Metric Quick Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full md:w-auto">
-            <div className="px-4 py-2.5 rounded-2xl glass-card bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/40 text-center">
+            <div className="px-4 py-2.5 rounded-2xl glass-card bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/40 text-center animate-fadeIn stagger-1 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">All Users</span>
               <span className="text-lg font-bold text-purple-600 dark:text-purple-400">{totalUsersCount}</span>
             </div>
-            <div className="px-4 py-2.5 rounded-2xl glass-card bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-center">
+            <div className="px-4 py-2.5 rounded-2xl glass-card bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-center animate-fadeIn stagger-2 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Total Requests</span>
               <span className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalRequestsCount}</span>
             </div>
-            <div className="px-4 py-2.5 rounded-2xl glass-card bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 text-center">
+            <div className="px-4 py-2.5 rounded-2xl glass-card bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 text-center animate-fadeIn stagger-3 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Pending</span>
               <span className="text-lg font-bold text-amber-600 dark:text-amber-400">{pendingCount}</span>
             </div>
-            <div className="px-4 py-2.5 rounded-2xl glass-card bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 text-center">
+            <div className="px-4 py-2.5 rounded-2xl glass-card bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 text-center animate-fadeIn stagger-4 card-hover-lift">
               <span className="text-xs text-slate-600 dark:text-slate-400 block font-semibold">Approved</span>
               <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{approvedCount}</span>
             </div>

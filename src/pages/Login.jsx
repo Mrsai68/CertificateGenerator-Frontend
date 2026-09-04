@@ -47,12 +47,12 @@ const Login = () => {
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-transparent">
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-md space-y-6 animate-scaleUp">
         {/* Login Form Container */}
-        <div className="glass-card p-8 rounded-3xl shadow-xl">
+        <div className="glass-card p-8 rounded-3xl shadow-xl card-hover-lift">
 
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 shadow-md shadow-blue-500/20 mb-4 text-white">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 shadow-md shadow-blue-500/20 mb-4 text-white animate-pulseHalo">
               <ShieldCheck className="w-8 h-8 text-white" />
             </div>
             <h2 className="font-extrabold text-2xl text-slate-900 dark:text-slate-100">Sign in to {INSTITUTION_CONFIG.collegeShortName} Portal</h2>
