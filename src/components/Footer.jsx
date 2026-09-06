@@ -88,9 +88,6 @@ const Footer = () => {
         {/* Bottom Copyright Bar */}
         <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-semibold gap-3">
           <p>&copy; {new Date().getFullYear()} {INSTITUTION_CONFIG.collegeName}. All rights reserved.</p>
-          <p className="flex items-center space-x-1">
-            <span>Powered by MERN Stack & Cryptographic Anti-Tamper Engine</span>
-          </p>
         </div>
       </div>
     </footer>

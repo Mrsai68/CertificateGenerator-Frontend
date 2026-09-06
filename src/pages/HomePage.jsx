@@ -57,7 +57,6 @@ export default function BonafideLandingPage() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-500/30 bg-blue-50/80 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-xs font-bold shadow-xs animate-bounceSoft">
             <Building2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>{INSTITUTION_CONFIG.collegeName}</span>
-            <span className="h-3 w-px bg-blue-300 dark:bg-blue-800"></span>
           </div>
 
           {/* Main Title */}
@@ -117,7 +116,7 @@ export default function BonafideLandingPage() {
 
       {/* Live Stat Banner */}
       <ScrollCompress className="py-10 border-y border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-auto md:grid-cols-3 gap-6 text-center">
 
           <div className="animate-fadeIn stagger-2">
             <span className="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400">100%</span>
