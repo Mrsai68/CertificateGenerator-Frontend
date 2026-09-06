@@ -1,12 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-
-/**
- * ScrollCompress Component Wrapper
- * 
- * - Increased scroll height travel (translateY 85px -> 0px).
- * - Increased landing delay & smooth 0.95s transition.
- * - Enhanced compression (scale 0.91 & translateY -40px).
- */
 export default function ScrollCompress({ children, className = '', staggerDelay = 0 }) {
   const ref = useRef(null);
   const [scrollState, setScrollState] = useState('below-view'); // 'below-view' | 'in-view' | 'compressed'

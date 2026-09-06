@@ -58,9 +58,6 @@ export default function BonafideLandingPage() {
             <Building2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>{INSTITUTION_CONFIG.collegeName}</span>
             <span className="h-3 w-px bg-blue-300 dark:bg-blue-800"></span>
-            <span className="text-amber-600 dark:text-amber-400 flex items-center font-extrabold">
-              <Sparkles className="w-3 h-3 mr-1 animate-spinSlow" /> MERN Stack Portal
-            </span>
           </div>
 
           {/* Main Title */}
@@ -121,10 +118,6 @@ export default function BonafideLandingPage() {
       {/* Live Stat Banner */}
       <ScrollCompress className="py-10 border-y border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div className="animate-fadeIn stagger-1">
-            <span className="text-3xl sm:text-4xl font-extrabold text-blue-600 dark:text-blue-400">1,250+</span>
-            <span className="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mt-1">Certificates Issued</span>
-          </div>
 
           <div className="animate-fadeIn stagger-2">
             <span className="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400">100%</span>
