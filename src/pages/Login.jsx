@@ -30,7 +30,7 @@ const Login = () => {
         navigate('/student-dashboard');
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid Username or password");
+      setError(err.response?.data?.message);
     } finally {
       setLoading(false);
     }
