@@ -3,13 +3,14 @@ import { useAuth } from "../context/useAuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import INSTITUTION_CONFIG from "../config/institutionConfig.js";
 import {
-  FileText, PlusCircle, Download, Clock, CheckCircle2, XCircle, Award, Building2,
-  AlertCircle, RefreshCw, Sparkles, Edit3, LogOut, Loader2, Eye, LayoutGrid, List, Copy, Check, User, X, Layers
+  FileText, PlusCircle, Download, Clock, CheckCircle2, Award, Building2,
+  AlertCircle, RefreshCw, Sparkles, Edit3, LogOut, Eye, LayoutGrid, List, Copy, Check, User, X
 } from 'lucide-react';
 import api from "../api/axios.js";
 import CertificatePreviewModal from '../components/CertificatePreviewModal.jsx';
 import RequestTimeline from '../components/RequestTimeline.jsx';
 import CertificateWallet from '../components/CertificateWallet.jsx';
+import StatusBadge from '../components/StatusBadge.jsx';
 
 const StudentDashboard = () => {
   const { user, logout } = useAuth();
@@ -270,7 +271,6 @@ const StudentDashboard = () => {
         <RequestTimeline request={requests[0]} />
       )}
 
-      {/* V2 Module Tab Bar */}
       <div className="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-3 overflow-x-auto custom-scrollbar">
         <button
           onClick={() => setActiveTab('REQUESTS')}
@@ -409,7 +409,7 @@ const StudentDashboard = () => {
                   className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
                     viewMode === 'GRID' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400'
                   }`}
-                  title="Grid Bento View"
+                  title="Grid View"
                 >
                   <LayoutGrid className="w-4 h-4" />
                 </button>
@@ -443,7 +443,6 @@ const StudentDashboard = () => {
               No certificate requests submitted yet. Select a purpose on the left to get started.
             </div>
           ) : viewMode === 'GRID' ? (
-            /* Bento Cards Grid View */
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {requests.map((req) => (
                 <div
@@ -455,21 +454,18 @@ const StudentDashboard = () => {
                       <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400">
                         <FileText className="w-5 h-5" />
                       </span>
-                      {req.status === 'PENDING' && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-400 border border-amber-300 dark:border-amber-800/50">
-                          <Clock className="w-3 h-3 mr-1 animate-spin" /> PENDING
-                        </span>
-                      )}
-                      {req.status === 'APPROVED' && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800/50">
-                          <CheckCircle2 className="w-3 h-3 mr-1" /> APPROVED
-                        </span>
-                      )}
-                      {req.status === 'REJECTED' && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-400 border border-rose-300 dark:border-rose-800/50">
-                          <XCircle className="w-3 h-3 mr-1" /> REJECTED
-                        </span>
-                      )}
+                      <StatusBadge
+                        status={req.status}
+                        countdownStr={(() => {
+                          if (req.status !== 'APPROVED' || !req.approvedDate) return null;
+                          const remainingMs = (new Date(req.approvedDate).getTime() + 5 * 60 * 1000) - now;
+                          if (remainingMs <= 0) return null;
+                          const secs = Math.max(0, Math.ceil(remainingMs / 1000));
+                          const m = Math.floor(secs / 60);
+                          const s = secs % 60;
+                          return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                        })()}
+                      />
                     </div>
 
                     <div>
@@ -550,21 +546,18 @@ const StudentDashboard = () => {
                         {req.appliedDate ? new Date(req.appliedDate).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'N/A'}
                       </td>
                       <td className="py-4 px-4">
-                        {req.status === 'PENDING' && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-400 border border-amber-300 dark:border-amber-800/50">
-                            <Clock className="w-3 h-3 mr-1 animate-spin" /> PENDING
-                          </span>
-                        )}
-                        {req.status === 'APPROVED' && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800/50">
-                            <CheckCircle2 className="w-3 h-3 mr-1" /> APPROVED
-                          </span>
-                        )}
-                        {req.status === 'REJECTED' && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-400 border border-rose-300 dark:border-rose-800/50">
-                            <XCircle className="w-3 h-3 mr-1" /> REJECTED
-                          </span>
-                        )}
+                        <StatusBadge
+                          status={req.status}
+                          countdownStr={(() => {
+                            if (req.status !== 'APPROVED' || !req.approvedDate) return null;
+                            const remainingMs = (new Date(req.approvedDate).getTime() + 5 * 60 * 1000) - now;
+                            if (remainingMs <= 0) return null;
+                            const secs = Math.max(0, Math.ceil(remainingMs / 1000));
+                            const m = Math.floor(secs / 60);
+                            const s = secs % 60;
+                            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                          })()}
+                        />
                       </td>
                       <td className="py-4 px-4 text-right">
                         <div className="flex items-center justify-end space-x-2">
