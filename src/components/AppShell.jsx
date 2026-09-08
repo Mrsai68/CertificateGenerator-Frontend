@@ -8,6 +8,7 @@ import { useAuth } from '../context/useAuthContext.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
 import INSTITUTION_CONFIG from '../config/institutionConfig.js';
 import api from '../api/axios.js';
+import NotificationDropdown from './NotificationDropdown.jsx';
 
 export default function AppShell({ children }) {
   const { user, logout } = useAuth();
@@ -229,6 +230,7 @@ export default function AppShell({ children }) {
           </div>
 
           <div className="flex items-center space-x-3">
+            <NotificationDropdown />
             <div className="hidden sm:flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
               <Award className="w-3.5 h-3.5 mr-1 text-blue-600" />
               <span>MSBTE / DTE Govt Standard</span>

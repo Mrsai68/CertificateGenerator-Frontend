@@ -1,35 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
-import { ShieldCheck, ShieldAlert, Calendar, CheckCircle2, XCircle, FileCheck2, ArrowLeft, Copy, Check, ExternalLink } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, Calendar, CheckCircle2, XCircle, FileCheck2, ArrowLeft, Copy, Check, ExternalLink, QrCode, Search } from 'lucide-react';
+import QrScannerModal from '../components/QrScannerModal.jsx';
 
 export default function PublicVerify() {
   const { token } = useParams();
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+
+  const verifyCert = async (lookupKey) => {
+    if (!lookupKey) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await api.get(`/api/v1/public/verify/${lookupKey}`);
+      setData(res.data);
+    } catch (err) {
+      setError('Verification service unavailable or network error.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const verifyCert = async () => {
-      setLoading(true);
-      try {
-        const res = await api.get(`/api/v1/public/verify/${token}`);
-        setData(res.data);
-      } catch (err) {
-        setError('Verification service unavailable or network error.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (token) {
-      verifyCert();
+      verifyCert(token);
     }
   }, [token]);
 
+  const handleManualSearch = (e) => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      let key = searchInput.trim();
+      if (key.includes('/verify/')) {
+        key = key.split('/verify/')[1];
+      }
+      navigate(`/verify/${key}`);
+      verifyCert(key);
+    }
+  };
+
+  const handleScanSuccess = (scannedToken) => {
+    setShowScanner(false);
+    navigate(`/verify/${scannedToken}`);
+    verifyCert(scannedToken);
+  };
+
   const handleCopyToken = () => {
-    navigator.clipboard.writeText(token);
+    navigator.clipboard.writeText(token || data?.certificateNumber || '');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -46,6 +70,36 @@ export default function PublicVerify() {
           <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Public Document Verification</h1>
           <p className="text-slate-600 dark:text-slate-400 text-sm mt-2 font-semibold">Official anti-tamper validation engine for institutional Bonafide certificates</p>
         </div>
+
+        {/* Verification Controls: Certificate ID Input & Camera QR Scanner Button */}
+        <div className="glass-card p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/60 mb-8 shadow-xs flex flex-col sm:flex-row items-center gap-3">
+          <form onSubmit={handleManualSearch} className="relative flex-1 w-full">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Enter Certificate ID / Ref No (e.g. CERT-123456)..."
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
+            />
+          </form>
+
+          <button
+            onClick={() => setShowScanner(true)}
+            className="w-full sm:w-auto px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 shrink-0"
+          >
+            <QrCode className="w-4 h-4" />
+            <span>Scan QR Code</span>
+          </button>
+        </div>
+
+        {/* Camera QR Scanner Modal */}
+        {showScanner && (
+          <QrScannerModal
+            onClose={() => setShowScanner(false)}
+            onScanSuccess={handleScanSuccess}
+          />
+        )}
 
         {loading ? (
           <div className="glass-card p-12 rounded-3xl text-center space-y-4 bg-white/95 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xs">

@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import INSTITUTION_CONFIG from "../config/institutionConfig.js";
 import {
   FileText, PlusCircle, Download, Clock, CheckCircle2, XCircle, Award, Building2,
-  AlertCircle, RefreshCw, Sparkles, Edit3, LogOut, Loader2, Eye, LayoutGrid, List, Copy, Check, User, X
+  AlertCircle, RefreshCw, Sparkles, Edit3, LogOut, Loader2, Eye, LayoutGrid, List, Copy, Check, User, X, Layers
 } from 'lucide-react';
 import api from "../api/axios.js";
 import CertificatePreviewModal from '../components/CertificatePreviewModal.jsx';
+import RequestTimeline from '../components/RequestTimeline.jsx';
+import CertificateWallet from '../components/CertificateWallet.jsx';
 
 const StudentDashboard = () => {
   const { user, logout } = useAuth();
@@ -24,6 +26,7 @@ const StudentDashboard = () => {
   const [forbiddenError, setForbiddenError] = useState(false);
   const [previewReq, setPreviewReq] = useState(null);
   const [viewMode, setViewMode] = useState('GRID'); // 'GRID' | 'TABLE'
+  const [activeTab, setActiveTab] = useState('REQUESTS'); // 'REQUESTS' | 'WALLET'
   const [copiedId, setCopiedId] = useState(null);
 
   // Edit Profile State
@@ -247,7 +250,46 @@ const StudentDashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Latest Request Timeline Stepper (If Any Requests Exist) */}
+      {requests.length > 0 && (
+        <RequestTimeline request={requests[0]} />
+      )}
+
+      {/* V2 Module Tab Bar */}
+      <div className="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-3">
+        <button
+          onClick={() => setActiveTab('REQUESTS')}
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+            activeTab === 'REQUESTS'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
+          }`}
+        >
+          <FileText className="w-4 h-4" />
+          <span>My Applications ({requests.length})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('WALLET')}
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+            activeTab === 'WALLET'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
+          }`}
+        >
+          <Award className="w-4 h-4" />
+          <span>Digital Certificate Wallet ({requests.filter(r => r.status === 'APPROVED').length})</span>
+        </button>
+      </div>
+
+      {activeTab === 'WALLET' ? (
+        <CertificateWallet
+          certificates={requests}
+          onPreview={setPreviewReq}
+          onDownload={handleDownload}
+        />
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
         {/* Application Submission Form */}
         <div className="glass-card p-6 rounded-3xl border border-slate-200 dark:border-slate-800 h-fit space-y-6 bg-white/95 dark:bg-slate-900/60 shadow-xs card-hover-lift animate-slideInLeft">
@@ -539,6 +581,7 @@ const StudentDashboard = () => {
         </div>
 
       </div>
+      )}
 
       {/* Edit Student Profile Modal */}
       {showEditProfileModal && (

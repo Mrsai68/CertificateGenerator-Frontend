@@ -6,9 +6,10 @@ import INSTITUTION_CONFIG from '../config/institutionConfig.js';
 import {
   ShieldAlert, Search, CheckCircle2, XCircle, Clock, AlertCircle, RefreshCw, Building2,
   Check, X, Users, FileText, Layers, Mail, UserPlus, UserCheck, UserX, Trash2, Power,
-  TrendingUp, BarChart3, FileCheck2, LogOut, Eye, EyeOff, LayoutGrid, List, Sparkles, Award
+  TrendingUp, BarChart3, FileCheck2, LogOut, Eye, EyeOff, LayoutGrid, List, Sparkles, Award, Activity
 } from 'lucide-react';
 import CertificatePreviewModal from '../components/CertificatePreviewModal.jsx';
+import AuditLogTable from '../components/AuditLogTable.jsx';
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
@@ -27,7 +28,7 @@ export default function AdminDashboard() {
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [roleFilter, setRoleFilter] = useState('ALL');
   const [selectedDepartment, setSelectedDepartment] = useState('ALL');
-  const [activeTab, setActiveTab] = useState('REQUESTS'); // 'REQUESTS' | 'USERS' | 'KPIS'
+  const [activeTab, setActiveTab] = useState('REQUESTS'); // 'REQUESTS' | 'USERS' | 'KPIS' | 'AUDIT'
   const [viewMode, setViewMode] = useState('GRID'); // 'GRID' | 'TABLE'
 
   // Modal State for Request Action (Approve / Reject)
@@ -380,6 +381,18 @@ export default function AdminDashboard() {
           >
             <BarChart3 className="w-4 h-4" />
             <span>KPI Reports & Analytics</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('AUDIT')}
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+              activeTab === 'AUDIT'
+                ? 'bg-purple-600 text-white shadow-md'
+                : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
+            }`}
+          >
+            <Activity className="w-4 h-4" />
+            <span>System Audit Logs</span>
           </button>
         </div>
 
@@ -841,6 +854,11 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* TAB 4: SYSTEM AUDIT LOGS */}
+      {activeTab === 'AUDIT' && (
+        <AuditLogTable />
       )}
 
       {/* Add User Modal */}
