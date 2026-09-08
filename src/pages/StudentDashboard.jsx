@@ -104,9 +104,13 @@ const StudentDashboard = () => {
     }
   };
 
+  const [now, setNow] = useState(Date.now());
+
   useEffect(() => {
     fetchMyRequests();
     fetchStudentProfile();
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(timer);
   }, []);
 
   const handleSaveProfile = async (e) => {
@@ -130,7 +134,18 @@ const StudentDashboard = () => {
     navigate('/login');
   };
 
-  const handleDownload = async (requestId, certNo) => {
+  const handleDownload = async (requestId, certNo, approvedDate) => {
+    if (approvedDate) {
+      const remainingMs = (new Date(approvedDate).getTime() + 5 * 60 * 1000) - Date.now();
+      if (remainingMs > 0) {
+        const secs = Math.ceil(remainingMs / 1000);
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        alert(`⏳ Digital Wallet Security Sync Active!\n\nYour certificate was approved by HOD and is undergoing 5-minute security indexing. It will be unlocked for download in ${mins}m ${s}s.`);
+        return;
+      }
+    }
+
     setDownloadingId(requestId);
     try {
       const response = await api.get(`/api/v1/certificates/download/${requestId}`, {
@@ -145,10 +160,7 @@ const StudentDashboard = () => {
       link.remove();
     } catch (err) {
       let errorMsg = 'Error generating PDF certificate';
-      if (err.response?.status === 403 || err.response?.status === 401) {
-        setForbiddenError(true);
-        errorMsg = 'Session expired. Please click Re-Login Now.';
-      } else if (err.response?.data instanceof Blob) {
+      if (err.response?.data instanceof Blob) {
         try {
           const text = await err.response.data.text();
           const json = JSON.parse(text);
@@ -158,8 +170,11 @@ const StudentDashboard = () => {
         }
       } else if (err.response?.data?.message) {
         errorMsg = err.response.data.message;
+      } else if (err.response?.status === 403 || err.response?.status === 401) {
+        setForbiddenError(true);
+        errorMsg = 'Session expired. Please click Re-Login Now.';
       }
-      alert('Download Error: ' + errorMsg);
+      alert('Download Notice: ' + errorMsg);
     } finally {
       setDownloadingId(null);
     }
@@ -498,7 +513,7 @@ const StudentDashboard = () => {
                       {req.status === 'APPROVED' && (
                         <button
                           disabled={downloadingId !== null}
-                          onClick={() => handleDownload(req.requestId, req.certificateNumber)}
+                          onClick={() => handleDownload(req.requestId, req.certificateNumber, req.approvedDate)}
                           className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md flex items-center space-x-1"
                         >
                           <Download className="w-3.5 h-3.5" />
@@ -563,7 +578,7 @@ const StudentDashboard = () => {
                           )}
                           {req.status === 'APPROVED' && (
                             <button
-                              onClick={() => handleDownload(req.requestId, req.certificateNumber)}
+                              onClick={() => handleDownload(req.requestId, req.certificateNumber, req.approvedDate)}
                               className="px-3 py-1.5 rounded-xl bg-blue-600 text-white font-extrabold text-xs shadow-md"
                             >
                               PDF

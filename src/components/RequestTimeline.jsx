@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FileText, Clock, CheckCircle2, XCircle, Award, Building2,
   Calendar, ShieldCheck, ArrowRight, Sparkles, UserCheck, AlertCircle, Check
 } from 'lucide-react';
 
 export default function RequestTimeline({ request }) {
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (!request) return null;
 
   const isPending = request.status === 'PENDING';
   const isApproved = request.status === 'APPROVED';
   const isRejected = request.status === 'REJECTED';
 
+  // 5-Minute Digital Wallet Security Release Delay
+  const WALLET_DELAY_MS = 5 * 60 * 1000;
+  const approvedTime = request.approvedDate ? new Date(request.approvedDate).getTime() : 0;
+  const remainingMs = isApproved ? (approvedTime + WALLET_DELAY_MS) - now : 0;
+  const isWalletUnlocked = isApproved && remainingMs <= 0;
+
+  const formatCountdown = (ms) => {
+    const totalSecs = Math.max(0, Math.ceil(ms / 1000));
+    const mins = Math.floor(totalSecs / 60);
+    const secs = totalSecs % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
+
   // Calculate progress percentage
-  let progressPct = 33; // Submitted & Under Review
-  if (isApproved) progressPct = 100; // Complete
+  let progressPct = 33; // Step 1 & 2 Under Review
   if (isRejected) progressPct = 66; // Failed at review stage
+  else if (isApproved) {
+    progressPct = isWalletUnlocked ? 100 : 80; // 80% while 5-min delay active, 100% when unlocked
+  }
 
   const appliedFormatted = request.appliedDate
     ? new Date(request.appliedDate).toLocaleString(undefined, {
@@ -58,10 +80,16 @@ export default function RequestTimeline({ request }) {
     },
     {
       step: 4,
-      title: 'Digital Wallet Availability',
-      subtitle: isApproved ? 'A4 PDF Download & QR Verification Active' : (isRejected ? 'Application Terminated' : 'Unlocks Upon HOD Approval'),
-      timestamp: isApproved ? 'Ready' : (isRejected ? 'Locked' : 'Locked'),
-      status: isApproved ? 'completed' : (isRejected ? 'error' : 'upcoming'),
+      title: isApproved ? (isWalletUnlocked ? 'Digital Wallet Available' : 'Digital Wallet Syncing') : 'Digital Wallet Availability',
+      subtitle: isApproved
+        ? (isWalletUnlocked
+            ? 'A4 PDF Download & QR Verification Active'
+            : `5-Min Security Release Lock Active (Unlocks in ${formatCountdown(remainingMs)})`)
+        : (isRejected ? 'Application Terminated' : 'Unlocks Upon HOD Approval'),
+      timestamp: isApproved
+        ? (isWalletUnlocked ? 'Ready in Wallet' : `Syncing in ${formatCountdown(remainingMs)}`)
+        : 'Locked',
+      status: isApproved ? (isWalletUnlocked ? 'completed' : 'current') : (isRejected ? 'error' : 'upcoming'),
       icon: Award,
       badge: 'Step 4'
     }
@@ -89,9 +117,15 @@ export default function RequestTimeline({ request }) {
             </span>
           )}
           {isApproved && (
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/50 shadow-xs">
-              <CheckCircle2 className="w-3.5 h-3.5 mr-1.5" /> APPROVED & ISSUED
-            </span>
+            isWalletUnlocked ? (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/50 shadow-xs">
+                <CheckCircle2 className="w-3.5 h-3.5 mr-1.5" /> APPROVED & WALLET READY
+              </span>
+            ) : (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-100 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800/50 shadow-xs">
+                <Clock className="w-3.5 h-3.5 mr-1.5 animate-spin" /> APPROVED (WALLET SYNC: {formatCountdown(remainingMs)})
+              </span>
+            )
           )}
           {isRejected && (
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-400 border border-rose-300 dark:border-rose-800/50 shadow-xs">
