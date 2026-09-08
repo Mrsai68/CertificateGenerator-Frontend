@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoutes.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import HodDashboard from "./pages/HodDashboard.jsx";
 import PublicVerify from "./pages/PublicVerify.jsx";
+import VerifyDocument from "./pages/VerifyDocument.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import BonafideLandingPage from "./pages/HomePage.jsx";
 
@@ -56,6 +57,10 @@ const App = () => {
               }
             />
 
+            <Route path="/verify-document" element={<VerifyDocument />} />
+            <Route path="/verify-document/:certNo" element={<VerifyDocument />} />
+            <Route path="/verify-cert" element={<VerifyDocument />} />
+            <Route path="/verify-cert/:certNo" element={<VerifyDocument />} />
             <Route path="/verify/:token" element={<PublicVerify />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

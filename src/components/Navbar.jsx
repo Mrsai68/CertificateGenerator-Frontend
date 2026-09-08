@@ -53,9 +53,21 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* Quick Navigation Links */}
-            {user && (
-              <div className="hidden md:flex items-center space-x-2 pl-4 border-l border-slate-200 dark:border-slate-800 text-xs font-extrabold">
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center space-x-2 pl-4 border-l border-slate-200 dark:border-slate-800 text-xs font-extrabold">
+              <Link
+                to="/verify-document"
+                className={`px-3 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 ${
+                  location.pathname.includes('/verify')
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Verify Document</span>
+              </Link>
+
+              {user && (
                 <Link
                   to={getDashboardPath()}
                   className={`px-3 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 ${
@@ -67,8 +79,8 @@ const Navbar = () => {
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   <span>My Dashboard</span>
                 </Link>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           <div className="flex items-center space-x-3 sm:space-x-4">
