@@ -191,15 +191,15 @@ export default function PublicVerify() {
 
             </div>
 
-            {/* Cryptographic Token Box with Copy */}
+            {/* Certificate ID Box with Copy */}
             <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-mono font-bold">
-              <span className="truncate pr-2">Token: {token}</span>
+              <span className="truncate pr-2">Certificate Ref No: {data?.certificateNumber || token}</span>
               <button
                 onClick={handleCopyToken}
                 className="px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 hover:bg-blue-100 flex items-center space-x-1 shrink-0 font-sans"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? 'Copied!' : 'Copy Token'}</span>
+                <span>{copied ? 'Copied!' : 'Copy Ref No'}</span>
               </button>
             </div>
 

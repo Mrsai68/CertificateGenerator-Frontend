@@ -271,10 +271,10 @@ const StudentDashboard = () => {
       )}
 
       {/* V2 Module Tab Bar */}
-      <div className="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-3">
+      <div className="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-3 overflow-x-auto custom-scrollbar">
         <button
           onClick={() => setActiveTab('REQUESTS')}
-          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all shrink-0 ${
             activeTab === 'REQUESTS'
               ? 'bg-blue-600 text-white shadow-md'
               : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
@@ -286,7 +286,7 @@ const StudentDashboard = () => {
 
         <button
           onClick={() => setActiveTab('WALLET')}
-          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+          className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all shrink-0 ${
             activeTab === 'WALLET'
               ? 'bg-blue-600 text-white shadow-md'
               : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
@@ -500,9 +500,9 @@ const StudentDashboard = () => {
                         </button>
                       )}
 
-                      {req.verificationToken && (
+                      {(req.certificateNumber || req.verificationToken) && (
                         <button
-                          onClick={() => handleCopyLink(req.verificationToken, req.requestId)}
+                          onClick={() => handleCopyLink(req.certificateNumber || req.verificationToken, req.requestId)}
                           className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 border border-slate-300 dark:border-slate-700"
                           title="Copy Verification Link"
                         >

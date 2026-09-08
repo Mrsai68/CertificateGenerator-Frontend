@@ -32,8 +32,7 @@ export default function CertificatePreviewModal({ req, onClose, onDownload }) {
     second: '2-digit'
   });
 
-  const verificationToken = req.verificationToken || 'VALID-TOKEN';
-  const verificationUrl = `${window.location.origin}/verify/${verificationToken}`;
+  const verificationUrl = `${window.location.origin}/verify/${certNo}`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(verificationUrl);

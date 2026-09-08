@@ -59,11 +59,11 @@ export default function CertificateWallet({ certificates, onPreview, onDownload 
       {syncingCertificates.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center space-x-2 text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            <Clock className="w-4 h-4 animate-spin" />
+            <Clock className="w-4 h-4 animate-spin shrink-0" />
             <span>Digital Wallet Syncing In Progress ({syncingCertificates.length})</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {syncingCertificates.map((cert) => {
               const remainingMs = (new Date(cert.approvedDate).getTime() + WALLET_DELAY_MS) - now;
               const countdownStr = formatCountdown(remainingMs);
@@ -71,11 +71,11 @@ export default function CertificateWallet({ certificates, onPreview, onDownload 
               return (
                 <div
                   key={cert.requestId}
-                  className="glass-card p-6 rounded-3xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-50/60 via-white to-blue-50/40 dark:from-indigo-950/40 dark:via-slate-900 dark:to-blue-950/30 shadow-md relative overflow-hidden space-y-4 animate-pulseHalo"
+                  className="glass-card p-4 sm:p-6 rounded-3xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-50/60 via-white to-blue-50/40 dark:from-indigo-950/40 dark:via-slate-900 dark:to-blue-950/30 shadow-md relative overflow-hidden space-y-4 animate-pulseHalo"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center space-x-2">
-                      <span className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                      <span className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 shrink-0">
                         <Lock className="w-5 h-5" />
                       </span>
                       <div>
@@ -84,32 +84,32 @@ export default function CertificateWallet({ certificates, onPreview, onDownload 
                       </div>
                     </div>
 
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800">
-                      <Clock className="w-3.5 h-3.5 mr-1.5 animate-spin" /> UNLOCKS IN {countdownStr}
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800 shrink-0">
+                      <Clock className="w-3.5 h-3.5 mr-1.5 animate-spin shrink-0" /> UNLOCKS IN {countdownStr}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="font-extrabold text-base text-slate-900 dark:text-slate-100">{cert.purpose || 'Bonafide Certificate'}</h3>
+                    <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100">{cert.purpose || 'Bonafide Certificate'}</h3>
                     <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 font-semibold flex items-center">
-                      <Building2 className="w-3.5 h-3.5 mr-1 text-slate-500" /> {cert.department} • {cert.academicYear}
+                      <Building2 className="w-3.5 h-3.5 mr-1 text-slate-500 shrink-0" /> {cert.department} • {cert.academicYear}
                     </p>
                   </div>
 
                   <div className="p-3 rounded-2xl bg-indigo-100/50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-xs space-y-1">
-                    <div className="flex items-center justify-between text-indigo-900 dark:text-indigo-200 font-bold">
-                      <span>5-Minute Security Clearance Active</span>
-                      <span className="font-mono text-indigo-600 dark:text-indigo-400">{countdownStr} remaining</span>
+                    <div className="flex flex-wrap items-center justify-between text-indigo-900 dark:text-indigo-200 font-bold gap-1">
+                      <span>5-Min Security Clearance</span>
+                      <span className="font-mono text-indigo-600 dark:text-indigo-400">{countdownStr} left</span>
                     </div>
                     <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">
-                      Your certificate was approved by HOD! It is undergoing anti-tamper signature indexing before entering your wallet.
+                      Approved by HOD! Anti-tamper signature indexing in progress.
                     </p>
                   </div>
 
-                  <div className="pt-2 flex items-center space-x-2 opacity-60">
+                  <div className="pt-1 opacity-60">
                     <button
                       disabled
-                      className="flex-1 py-2.5 px-3 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-500 font-bold text-xs flex items-center justify-center space-x-1 cursor-not-allowed"
+                      className="w-full py-2.5 px-3 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-500 font-bold text-xs flex items-center justify-center space-x-1 cursor-not-allowed"
                     >
                       <Lock className="w-3.5 h-3.5" />
                       <span>Wallet Locked ({countdownStr})</span>
@@ -127,21 +127,21 @@ export default function CertificateWallet({ certificates, onPreview, onDownload 
         <div className="space-y-4">
           {syncingCertificates.length > 0 && (
             <div className="flex items-center space-x-2 text-xs font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 pt-2">
-              <CheckCircle2 className="w-4 h-4" />
+              <CheckCircle2 className="w-4 h-4 shrink-0" />
               <span>Available Digital Certificates ({unlockedCertificates.length})</span>
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {unlockedCertificates.map((cert) => (
               <div
                 key={cert.requestId}
-                className="glass-card p-6 rounded-3xl border-2 border-emerald-500/30 bg-white/95 dark:bg-slate-900/80 shadow-md relative overflow-hidden space-y-5 card-hover-lift"
+                className="glass-card p-4 sm:p-6 rounded-3xl border-2 border-emerald-500/30 bg-white/95 dark:bg-slate-900/80 shadow-md relative overflow-hidden space-y-4 sm:space-y-5 card-hover-lift"
               >
                 {/* Top Status Capsule */}
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center space-x-2">
-                    <span className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+                    <span className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 shrink-0">
                       <Award className="w-5 h-5" />
                     </span>
                     <div>
@@ -150,34 +150,34 @@ export default function CertificateWallet({ certificates, onPreview, onDownload 
                     </div>
                   </div>
 
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
-                    <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> VALID
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shrink-0">
+                    <CheckCircle2 className="w-3.5 h-3.5 mr-1 shrink-0" /> VALID
                   </span>
                 </div>
 
                 {/* Details */}
                 <div>
-                  <h3 className="font-extrabold text-base text-slate-900 dark:text-slate-100">{cert.purpose || 'Bonafide Certificate'}</h3>
+                  <h3 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100">{cert.purpose || 'Bonafide Certificate'}</h3>
                   <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 font-semibold flex items-center">
-                    <Building2 className="w-3.5 h-3.5 mr-1 text-slate-500" /> {cert.department} • {cert.academicYear}
+                    <Building2 className="w-3.5 h-3.5 mr-1 text-slate-500 shrink-0" /> {cert.department} • {cert.academicYear}
                   </p>
                 </div>
 
                 {/* Dates */}
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs flex items-center justify-between text-slate-600 dark:text-slate-400 font-semibold">
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs flex flex-wrap items-center justify-between gap-1 text-slate-600 dark:text-slate-400 font-semibold">
                   <span className="flex items-center">
-                    <Calendar className="w-3.5 h-3.5 mr-1" /> Issued: {cert.approvedDate ? new Date(cert.approvedDate).toLocaleDateString() : 'Official'}
+                    <Calendar className="w-3.5 h-3.5 mr-1 shrink-0" /> Issued: {cert.approvedDate ? new Date(cert.approvedDate).toLocaleDateString() : 'Official'}
                   </span>
                   <span className="text-emerald-600 dark:text-emerald-400 font-bold">Anti-Tamper Signed</span>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="pt-2 flex items-center space-x-2">
+                <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <button
                     onClick={() => onPreview(cert)}
                     className="flex-1 py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-extrabold text-xs border border-slate-300 dark:border-slate-700 flex items-center justify-center space-x-1"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-600" />
+                    <Eye className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                     <span>Preview</span>
                   </button>
 
@@ -185,14 +185,14 @@ export default function CertificateWallet({ certificates, onPreview, onDownload 
                     onClick={() => onDownload(cert.requestId, cert.certificateNumber)}
                     className="flex-1 py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md flex items-center justify-center space-x-1"
                   >
-                    <Download className="w-3.5 h-3.5" />
+                    <Download className="w-3.5 h-3.5 shrink-0" />
                     <span>Download A4 PDF</span>
                   </button>
 
-                  {cert.verificationToken && (
+                  {(cert.certificateNumber || cert.verificationToken) && (
                     <button
-                      onClick={() => handleCopyLink(cert.verificationToken, cert.requestId)}
-                      className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 border border-slate-300 dark:border-slate-700"
+                      onClick={() => handleCopyLink(cert.certificateNumber || cert.verificationToken, cert.requestId)}
+                      className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 border border-slate-300 dark:border-slate-700 flex items-center justify-center"
                       title="Copy Public Verification Link"
                     >
                       {copiedId === cert.requestId ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}

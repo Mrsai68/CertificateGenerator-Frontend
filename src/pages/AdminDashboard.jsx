@@ -346,10 +346,10 @@ export default function AdminDashboard() {
 
       {/* Navigation Tabs & Module Selector */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-2">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 overflow-x-auto custom-scrollbar max-w-full pb-1">
           <button
             onClick={() => setActiveTab('REQUESTS')}
-            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all shrink-0 ${
               activeTab === 'REQUESTS'
                 ? 'bg-purple-600 text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
@@ -361,7 +361,7 @@ export default function AdminDashboard() {
 
           <button
             onClick={() => setActiveTab('USERS')}
-            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all shrink-0 ${
               activeTab === 'USERS'
                 ? 'bg-purple-600 text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
@@ -373,7 +373,7 @@ export default function AdminDashboard() {
 
           <button
             onClick={() => setActiveTab('KPIS')}
-            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all shrink-0 ${
               activeTab === 'KPIS'
                 ? 'bg-purple-600 text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
@@ -385,7 +385,7 @@ export default function AdminDashboard() {
 
           <button
             onClick={() => setActiveTab('AUDIT')}
-            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all shrink-0 ${
               activeTab === 'AUDIT'
                 ? 'bg-purple-600 text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'
